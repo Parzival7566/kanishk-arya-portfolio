@@ -179,10 +179,106 @@ function openOneWinCloseOther() {
     }
 }
 
+// Function to open a folder
 function openFolder(folderName) {
-    alert("Opening " + folderName);
-    // Add more complex functionality as needed
+    console.log(`Attempting to open folder: content/${folderName}/index.txt`);
+    fetch(`content/${folderName}/index.txt`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            const files = data.split('\n').filter(file => file.trim() !== '');
+            let folderWindow = `
+                <div class="window">
+                    <div class="title-bar">
+                        <span>${folderName}</span>
+                        <button onclick="closeWindow(this)">X</button>
+                    </div>
+                    <div class="window-content">
+                        <div class="folder-contents">
+            `;
+            files.forEach(file => {
+                if (file.endsWith('.txt')) {
+                    folderWindow += `<div class="file-item" onclick="openTextFile('${folderName}', '${file}')">
+                                        <img src="icons/text-file-icon.png" class="file-icon" alt="file">
+                                        <span>${file}</span>
+                                     </div>`;
+                } else if (file.endsWith('.jpg') || file.endsWith('.png')) {
+                    folderWindow += `<div class="file-item" onclick="openImage('${folderName}', '${file}')">
+                                        <img src="icons/image-file-icon.png" class="file-icon" alt="file">
+                                        <span>${file}</span>
+                                     </div>`;
+                } else {
+                    folderWindow += `<div class="file-item" onclick="openFolder('${folderName}/${file}')">
+                                        <img src="icons/folder-icon.png" class="file-icon" alt="folder">
+                                        <span>${file}</span>
+                                     </div>`;
+                }
+            });
+            folderWindow += `
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('windows').innerHTML += folderWindow;
+        })
+        .catch(error => console.error('Error:', error));
 }
+
+// Function to open a text file
+function openTextFile(folderName, fileName) {
+    console.log(`Attempting to open text file: content/${folderName}/${fileName}`);
+    fetch(`content/${folderName}/${fileName}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            const fileWindow = `
+                <div class="window">
+                    <div class="title-bar">
+                        <span>${fileName}</span>
+                        <button onclick="closeWindow(this)">X</button>
+                    </div>
+                    <div class="window-content">
+                        <pre>${data}</pre>
+                    </div>
+                </div>
+            `;
+            document.getElementById('windows').innerHTML += fileWindow;
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+// Function to open an image
+function openImage(folderName, fileName) {
+    console.log(`Attempting to open image: content/${folderName}/${fileName}`);
+    const imageWindow = `
+        <div class="window">
+            <div class="title-bar">
+                <span>${fileName}</span>
+                <button onclick="closeWindow(this)">X</button>
+            </div>
+            <div class="window-content">
+                <img src="content/${folderName}/${fileName}" alt="${fileName}">
+            </div>
+        </div>
+    `;
+    document.getElementById('windows').innerHTML += imageWindow;
+}
+
+// Function to close a window
+function closeWindow(button) {
+    const window = button.closest('.window');
+    window.remove();
+}
+
+
 
 // Assuming 'desktopLoaded' is a flag that is true when the desktop is fully loaded
 let desktopLoaded = false;

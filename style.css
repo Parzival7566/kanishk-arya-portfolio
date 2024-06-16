@@ -945,3 +945,68 @@ label input {
     position: absolute;
     border-radius: 0.2em;
 }
+
+.window {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    width: 400px;
+    height: 300px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.title-bar {
+    background: #0078d7;
+    color: white;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-bar span {
+    font-weight: bold;
+}
+
+.title-bar button {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.window-content {
+    flex-grow: 1;
+    padding: 10px;
+    overflow: auto;
+}
+
+.folder-contents {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.file-item {
+    width: 80px;
+    margin: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.file-item img.file-icon {
+    width: 48px;
+    height: 48px;
+}
+
+.file-item span {
+    display: block;
+    margin-top: 5px;
+    word-wrap: break-word;
+}
+
+pre {
+    white-space: pre-wrap;
+}
+

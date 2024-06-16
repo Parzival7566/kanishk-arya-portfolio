@@ -1,0 +1,1 @@
+Languages: Python, C, C++, Shell, CUDA, MySQL, HTML, CSS, JS

@@ -1,0 +1,3 @@
+file1.txt
+image1.jpg
+subfolder1
