@@ -180,7 +180,10 @@ function openOneWinCloseOther() {
 }
 
 // Function to open a folder
+let folderHistory = [];
+
 function openFolder(folderName) {
+    folderHistory.push(folderName);
     console.log(`Attempting to open folder: content/${folderName}/index.txt`);
     fetch(`content/${folderName}/index.txt`)
         .then(response => {
@@ -194,8 +197,13 @@ function openFolder(folderName) {
             let folderWindow = `
                 <div class="window">
                     <div class="title-bar">
+                        <button class="back-btn" onclick="goBack()"></button>
                         <span>${folderName}</span>
-                        <button onclick="closeWindow(this)">X</button>
+                        <div class="window-buttons">
+                            <button onclick="minimizeWindow(this)">−</button>
+                            <button onclick="maximizeWindow(this)">🔳</button>
+                            <button onclick="closeWindow(this)">❌</button>
+                        </div>
                     </div>
                     <div class="window-content">
                         <div class="folder-contents">
@@ -224,12 +232,22 @@ function openFolder(folderName) {
                 </div>
             `;
             document.getElementById('windows').innerHTML += folderWindow;
+            document.querySelectorAll('.window').forEach(makeResizable);
         })
         .catch(error => console.error('Error:', error));
 }
 
+function goBack() {
+    if (folderHistory.length > 1) {
+        folderHistory.pop();
+        const previousFolder = folderHistory[folderHistory.length - 1];
+        openFolder(previousFolder);
+    }
+}
+
 // Function to open a text file
 function openTextFile(folderName, fileName) {
+    preventVideoRestart(); // Pause the video when opening a new window
     console.log(`Attempting to open text file: content/${folderName}/${fileName}`);
     fetch(`content/${folderName}/${fileName}`)
         .then(response => {
@@ -239,18 +257,25 @@ function openTextFile(folderName, fileName) {
             return response.text();
         })
         .then(data => {
-            const fileWindow = `
-                <div class="window">
-                    <div class="title-bar">
-                        <span>${fileName}</span>
-                        <button onclick="closeWindow(this)">X</button>
-                    </div>
-                    <div class="window-content">
-                        <pre>${data}</pre>
+            const fileWindow = document.createElement('div');
+            fileWindow.className = 'window';
+            fileWindow.style.position = 'absolute';
+            fileWindow.style.left = '150px';
+            fileWindow.innerHTML = `
+                <div class="title-bar">
+                    <span>${fileName}</span>
+                    <div class="window-buttons">
+                        <button onclick="minimizeWindow(this)">−</button>
+                        <button onclick="maximizeWindow(this)">🔳</button>
+                        <button onclick="closeWindow(this)">❌</button>
                     </div>
                 </div>
+                <div class="window-content">
+                    <pre>${data}</pre>
+                </div>
             `;
-            document.getElementById('windows').innerHTML += fileWindow;
+            document.body.appendChild(fileWindow);
+            makeResizable(fileWindow);
         })
         .catch(error => console.error('Error:', error));
 }
@@ -262,7 +287,11 @@ function openImage(folderName, fileName) {
         <div class="window">
             <div class="title-bar">
                 <span>${fileName}</span>
-                <button onclick="closeWindow(this)">X</button>
+                <div class="window-buttons">
+                    <button onclick="minimizeWindow(this)">−</button>
+                            <button onclick="maximizeWindow(this)">🔳</button>
+                            <button onclick="closeWindow(this)">❌</button>
+                </div>
             </div>
             <div class="window-content">
                 <img src="content/${folderName}/${fileName}" alt="${fileName}">
@@ -278,7 +307,53 @@ function closeWindow(button) {
     window.remove();
 }
 
+// Function to minimize a window
+function minimizeWindow(button) {
+    const window = button.closest('.window');
+    window.style.display = 'none';
+}
 
+// Function to maximize a window
+function maximizeWindow(button) {
+    const window = button.closest('.window');
+    if (window.classList.contains('maximized')) {
+        window.classList.remove('maximized');
+        window.style.width = '600px';
+        window.style.height = '400px';
+    } else {
+        window.classList.add('maximized');
+        window.style.width = '100vw';
+        window.style.height = '100vh';
+        window.style.left = '0';
+        window.style.top = '0';
+    }
+}
+
+// Function to enable window resizing
+function makeResizable(element) {
+    const resizer = document.createElement('div');
+    resizer.className = 'resizer';
+    element.appendChild(resizer);
+    resizer.addEventListener('mousedown', initResize, false);
+
+    function initResize(e) {
+        window.addEventListener('mousemove', resize, false);
+        window.addEventListener('mouseup', stopResize, false);
+    }
+
+    function resize(e) {
+        element.style.width = (e.clientX - element.offsetLeft) + 'px';
+        element.style.height = (e.clientY - element.offsetTop) + 'px';
+    }
+
+    function stopResize() {
+        window.removeEventListener('mousemove', resize, false);
+        window.removeEventListener('mouseup', stopResize, false);
+    }
+}
+
+// Apply resizable functionality to all windows
+document.querySelectorAll('.window').forEach(makeResizable);
 
 // Assuming 'desktopLoaded' is a flag that is true when the desktop is fully loaded
 let desktopLoaded = false;
@@ -304,10 +379,16 @@ function openWidgetsPanel() {
 }
 
 // Adding event listener to the video
-document.getElementById('myVideo').addEventListener('ended', function() {
+const videoElement = document.getElementById('myVideo');
+videoElement.addEventListener('ended', function() {
     console.log("Video ended.");
     openWidgetsPanel(); // Try opening the widgets panel once the video ends
 });
+
+// Prevent video from restarting when opening a new window
+function preventVideoRestart() {
+    videoElement.pause();
+}
 
 // Call loadDesktop to simulate the desktop loading
 loadDesktop();

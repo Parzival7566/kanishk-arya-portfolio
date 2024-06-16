@@ -948,13 +948,15 @@ label input {
 
 .window {
     position: absolute;
-    background: white;
+    background: rgba(0, 0, 0, 0.8); /* Dark theme with transparency */
     border: 1px solid #ccc;
-    width: 400px;
-    height: 300px;
+    width: 600px; /* Increased width */
+    height: 400px; /* Increased height */
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
+    color: white; /* Text color for better visibility in dark theme */
+    border-radius: 5px; /* Rounded corners */
 }
 
 .title-bar {
@@ -966,21 +968,55 @@ label input {
     align-items: center;
 }
 
-.title-bar span {
-    font-weight: bold;
-}
-
 .title-bar button {
     background: transparent;
     border: none;
     color: white;
     cursor: pointer;
+    width: 24px; /* Ensure buttons are square */
+    height: 24px;
+    background-image: url('icons/button-icon.png'); /* Placeholder for actual icons */
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Specific icons for minimize, maximize, close */
+.minimize-btn {
+    background-image: url('icons/minimize-icon.png');
+    color: black;
+}
+
+.maximize-btn {
+    background-image: url('icons/maximize-icon.png');
+    color: black;
+}
+
+.close-btn {
+    background-image: url('icons/close-icon.png');
+    color: black;
+}
+
+.back-btn {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    background-image: url('icons/back-icon.png');
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .window-content {
     flex-grow: 1;
     padding: 10px;
     overflow: auto;
+}
+
+.window-content img {
+    max-width: 100%; /* Ensure image does not exceed the window width */
+    max-height: 100%; /* Ensure image does not exceed the window height */
+    object-fit: contain; /* Ensure the aspect ratio is maintained */
 }
 
 .folder-contents {
@@ -1010,3 +1046,12 @@ pre {
     white-space: pre-wrap;
 }
 
+.resizer {
+    width: 10px;
+    height: 10px;
+    background: #ccc;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    cursor: se-resize;
+}
