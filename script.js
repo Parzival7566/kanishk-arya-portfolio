@@ -280,25 +280,48 @@ function openTextFile(folderName, fileName) {
         .catch(error => console.error('Error:', error));
 }
 
-// Function to open an image
 function openImage(folderName, fileName) {
     console.log(`Attempting to open image: content/${folderName}/${fileName}`);
-    const imageWindow = `
-        <div class="window">
-            <div class="title-bar">
-                <span>${fileName}</span>
-                <div class="window-buttons">
-                    <button onclick="minimizeWindow(this)">−</button>
-                            <button onclick="maximizeWindow(this)">🔳</button>
-                            <button onclick="closeWindow(this)">❌</button>
+    fetch(`content/${folderName}/${fileName}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.blob(); // Use blob to handle image data
+        })
+        .then(blob => {
+            const imageWindow = document.createElement('div');
+            imageWindow.className = 'window';
+            imageWindow.style.position = 'absolute';
+            imageWindow.style.left = '150px';
+
+            // Calculate the position to place the image window just below the last window
+            const lastWindow = document.querySelector('.window:last-of-type');
+            if (lastWindow) {
+                const lastWindowRect = lastWindow.getBoundingClientRect();
+                imageWindow.style.top = `${lastWindowRect.bottom + 10}px`; // 10px for a little spacing
+            } else {
+                imageWindow.style.top = '150px'; // Default position if no other window is open
+            }
+
+            imageWindow.innerHTML = `
+                <div class="title-bar">
+                    <span>${fileName}</span>
+                    <div class="window-buttons">
+                        <button onclick="minimizeWindow(this)">−</button>
+                        <button onclick="maximizeWindow(this)">🔳</button>
+                        <button onclick="closeWindow(this)">❌</button>
+                    </div>
                 </div>
-            </div>
-            <div class="window-content">
-                <img src="content/${folderName}/${fileName}" alt="${fileName}">
-            </div>
-        </div>
-    `;
-    document.getElementById('windows').innerHTML += imageWindow;
+                <div class="window-content">
+                    <img src="${URL.createObjectURL(blob)}" alt="${fileName}" style="max-width: 100%; max-height: 100%;">
+                </div>
+                <div class="resizer"></div>
+            `;
+            document.body.appendChild(imageWindow);
+            makeResizable(imageWindow);
+        })
+        .catch(error => console.error('Error:', error));
 }
 
 // Function to close a window
@@ -331,9 +354,7 @@ function maximizeWindow(button) {
 
 // Function to enable window resizing
 function makeResizable(element) {
-    const resizer = document.createElement('div');
-    resizer.className = 'resizer';
-    element.appendChild(resizer);
+    const resizer = element.querySelector('.resizer');
     resizer.addEventListener('mousedown', initResize, false);
 
     function initResize(e) {
@@ -388,6 +409,100 @@ videoElement.addEventListener('ended', function() {
 // Prevent video from restarting when opening a new window
 function preventVideoRestart() {
     videoElement.pause();
+}
+
+// Function to open resume.pdf in a new window
+function openResume() {
+    window.open('resume.pdf', '_blank');
+}
+
+// Function to open DONOTOPEN.txt in a new window
+function openTxt() {
+        console.log(`Attempting to open text file: content/DONOTOPEN.txt`);
+        fetch(`content/DONOTOPEN.txt`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            const fileWindow = document.createElement('div');
+            fileWindow.className = 'window';
+            fileWindow.style.position = 'absolute';
+            fileWindow.style.left = '150px';
+            fileWindow.innerHTML = `
+                <div class="title-bar">
+                    <span>${`DONOTOPEN.txt`}</span>
+                    <div class="window-buttons">
+                        <button onclick="minimizeWindow(this)">−</button>
+                        <button onclick="maximizeWindow(this)">🔳</button>
+                        <button onclick="closeWindow(this)">❌</button>
+                    </div>
+                </div>
+                <div class="window-content">
+                    <pre>${data}</pre>
+                </div>
+            `;
+            document.body.appendChild(fileWindow);
+            makeResizable(fileWindow);
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+// Function to open a link in a new tab
+function openLink(link) {
+    window.open(link, '_blank');
+}
+
+// Function to open a mail window
+function openMail() {
+    const mailWindow = `
+        <div class="window">
+            <div class="title-bar">
+                <span>Send Mail</span>
+                <div class="window-buttons">
+                    <button onclick="minimizeWindow(this)">−</button>
+                    <button onclick="maximizeWindow(this)">🔳</button>
+                    <button onclick="closeWindow(this)">❌</button>
+                </div>
+            </div>
+            <div class="window-content">
+                <form id="mailForm">
+                    <label for="to">To:</label>
+                    <input type="email" id="to" value="kanishkarya2811@gmail.com" readonly><br><br>
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" required><br><br>
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" required><br><br>
+                    <label for="message">Message:</label>
+                    <textarea id="message" required></textarea><br><br>
+                    <button type="button" onclick="sendMail()">Send Email</button>
+                </form>
+            </div>
+        </div>
+    `;
+    document.getElementById('windows').innerHTML += mailWindow;
+    document.querySelectorAll('.window').forEach(makeResizable);
+}
+
+// Function to send mail (You'll need to implement the actual sending logic)
+function sendMail() {
+    // Get form data
+    const name = document.getElementById('name').value;
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value;
+
+    // Implement your mail sending logic here
+    // You can use AJAX to send the mail without leaving the page
+
+    // For example, you can log the mail details to the console
+    console.log('Name:', name);
+    console.log('Subject:', subject);
+    console.log('Message:', message);
+
+    // Display a success message or handle errors
+    alert('Email sent successfully!'); 
 }
 
 // Call loadDesktop to simulate the desktop loading

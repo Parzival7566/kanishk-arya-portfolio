@@ -183,8 +183,9 @@ nav #nav-container {
     position: absolute;
     left: 10px; /* Adjust as needed */
     top: 10px; /* Adjust as needed */
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: repeat(8, auto); /* 8 icons per column */
+    grid-auto-flow: column; /* Arrange items in columns */
     gap: 20px; /* Space between icons */
 }
 

@@ -1,0 +1,15 @@
+- Anaconda
+- Git
+- Jupyter
+- Google Colab
+- VS Code
+- Unity
+- AWS
+- Amazon Sagemaker
+- Docker
+- Async Celery-Redis-Flower
+- YOLO
+- MySQL
+- MongoDB
+- Firebase
+- Flutter

@@ -1,3 +1,4 @@
-file1.txt
-image1.jpg
+README.txt
+photo-i-clicked.jpg
+thats-me.jpg
 subfolder1
