@@ -1,0 +1,12 @@
+deeplearning_gen_ai_llms.png
+ibm_shell_linux.png
+iitkgp_ml.png
+iitm_dl.png
+iitm_dsa.png
+iitm_python_ds.png
+nvidia_cuda_python.png
+nvidia_cuda_c.png
+nvidia_jetson_nano.png
+nvidia_transformers.png
+stanford_adv_learning_algos.png
+stanford_supervisedML.png

@@ -1,0 +1,8 @@
+- Machine Learning Intern at Accrete.AI (December 2022 - October 2023)
+
+
+Accomplishments: 
+I dove deep into the world of computer vision, developing a machine learning algorithm for Smart Table Extraction (STX) that accurately detects tables and cells in images. I achieved high confidence values by leveraging and fine-tuning YOLOv3, YOLOv5, YOLOv7, and YOLOv8 architectures, training them on a vast dataset of 500,000 annotated images. Additionally, I created a unified training script for YOLOv5 and YOLOv7, simplifying the process of custom model training for future users. My work also extended to Document Question Answer methodologies, where I utilized and fine-tuned LayoutLMV2 for the DOCvQA dataset.
+
+Skills Gained: 
+This internship significantly enhanced my skills in computer vision, deep learning model development, transfer learning, and large dataset training. I gained practical experience with YOLO architectures, fine-tuning techniques, and performance optimization. My understanding of document processing and question answering systems also grew through working with LayoutLMV2.

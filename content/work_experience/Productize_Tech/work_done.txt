@@ -1,0 +1,8 @@
+- AI Intern at ProductizeTech (March 2024 - May 2024)
+
+Accomplishments: 
+I thrived in a fast-paced environment, developing and deploying AI-powered computer vision applications on AWS. My work involved leveraging services like Lambda, Rekognition, and S3, combined with Python, for tasks such as image processing, object detection, and 3D human body reconstruction. I successfully engineered and implemented pose estimation and human body segmentation models using cutting-edge transformer architectures to enhance accuracy. Furthermore, I built and optimized face detection and re-identification systems, gaining valuable expertise in facial recognition technology. My role extended to containerizing AI applications using Docker and deploying them on GPU-based Linux servers, demonstrating my proficiency in cloud-based deployment strategies.
+
+
+Skills Gained: 
+This internship provided a comprehensive learning experience in developing, deploying, and scaling AI solutions on the cloud. I gained hands-on expertise in AWS services, Python programming for computer vision, and containerization with Docker. My understanding of deep learning architectures for pose estimation, body segmentation, and facial recognition significantly deepened. Additionally, I honed my skills in API development using FastAPI, Celery, and Redis Queues, broadening my backend development skillset.

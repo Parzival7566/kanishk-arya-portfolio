@@ -1,0 +1,2 @@
+work_done.txt
+lor.png

@@ -30,25 +30,25 @@
             <img src="./images/certificate.png" alt="Certifications">
             <span>Certifications</span>
         </div>
-        <div class="desktop-icon" onclick="openFolder('Work Experience')">
+        <div class="desktop-icon" onclick="openFolder('work_experience')">
             <img src="./images/work.png" alt="Work Experience">
             <span>Work Experience</span>
         </div>
-        <div class="desktop-icon" onclick="openFolder('Projects')">
+        <div class="desktop-icon" onclick="openFolder('projects')">
             <img src="./images/project.png" alt="Projects">
             <span>Projects</span>
         </div>
-        <div class="desktop-icon" onclick="openFolder('Research Profile')">
+        <div class="desktop-icon" onclick="openFolder('research_profile')">
             <img src="./images/research.png" alt="Research Profile">
             <span>Research Profile</span>
         </div>
-        <div class="desktop-icon" onclick="openFolder('Achievements')">
+        <div class="desktop-icon" onclick="openFolder('achievements')">
             <img src="./images/achieve.png" alt="Achievements">
             <span>Achievements</span>
         </div>
-        <div class="desktop-icon" onclick="openFolder('Extra Curriculars')">
-            <img src="./images/extra.png" alt="Extra Curriculars">
-            <span>Extra Curriculars</span>
+        <div class="desktop-icon" onclick="openTxt()">
+            <img src="./images/word-icon.png" alt="DONOTOPEN">
+            <span>DONOTOPEN.txt</span>
         </div>
         <div class="desktop-icon" onclick="openResume()">
             <img src="./images/resume.png" alt="Resume">
@@ -70,10 +70,6 @@
             <img src="./images/mail.webp" alt="Mail">
             <span>Mail</span>
         </div>
-        <div class="desktop-icon" onclick="openTxt()">
-            <img src="./images/word-icon.png" alt="DONOTOPEN">
-            <span>DONOTOPEN.txt</span>
-        </div>
     </div>
 
     <div id="windows"></div>
@@ -89,7 +85,7 @@
         <div id="nav-container">
             <div id="first-container">
                 <!-- windows 11 logo -->
-                <div id="windows-div" title="Start">
+                <div id="windows-div" title="Start" style="display: none;">
                     <svg id="windows-logo" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#"
                         xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
                         width="58" height="58" version="1.1" viewBox="0 0 48.745 48.747">
@@ -101,6 +97,9 @@
                         </g>
                     </svg>
                 </div>
+                
+                <!-- windows 11 widget -->
+                <div id="widget-div" title="Start"><img src="./images/w11-logo.svg" alt=""></div>
                 <!-- search icon -->
                 <div id="search-div" title="Search"><svg aria-hidden="true" focusable="false" data-prefix="fas"
                         data-icon="magnifying-glass" class="svg-inline--fa fa-magnifying-glass" role="img"
@@ -109,9 +108,8 @@
                             d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z">
                         </path>
                     </svg></div>
-                <!-- windows 11 widget -->
-                <div id="widget-div" title="Widget"><img src="./images/w11-widget-icon.png" alt=""></div>
             </div>
+            
             <div id="second-container">
                 <div id="sistema-info">
                     <!-- wifi -->
@@ -140,8 +138,8 @@
                         </svg></div>
                 </div>
                 <div id="sistema-data">
-                    <div id="orario-data">12:00</div>
-                    <div id="calendario-data" title="Calendar Date">12/30/2021</div>
+                    <div id="orario-data"></div>
+                    <div id="calendario-data" title="Calendar Date"></div>
                 </div>
             </div>
         </div>
@@ -311,7 +309,7 @@
             </svg>
         </div>
         <div class="content-widget">
-            <p>Welcome to my portfolio website! Pretty neat, isn't it? Here, you can learn about my projects, experience, and skills.</p>
+            <p>Welcome to my (Kanishk Arya's) portfolio website! Pretty neat, isn't it? Here, you can learn about my projects, experience, and skills.</p>
         </div>
     </div>
     <div style="grid-area: calendario;" id="calendario-widget">
@@ -326,7 +324,7 @@
             </svg>
         </div>
         <div class="content-widget">
-            <p>Use the icons on the desktop to explore different sections of the site. Click on them to open apps and learn more about my work. I assure you there won't be any bugs there ..... mostly. Get started by clicking the Widget icon to exit.</p>
+            <p>Use the icons on the desktop to explore different sections of the site. Click on them to open apps and learn more about my work. I assure you there won't be any bugs there ..... mostly. Get started by clicking the Start icon to exit.</p>
         </div>
     </div>
     <div style="grid-area: galleria;" id="galleria-widget">
@@ -376,9 +374,7 @@
     </div>
 </section>
 
-    <section id="notification-section">
-        <div>Coming soon...</div>
-    </section>
+    
     <div class="extra">
         <!-- Background Animation Video -->
         <video autoplay muted id="myVideo">
@@ -465,6 +461,18 @@
 
     <!-- SelectionDrag Div with Javascript -->
     <div id="div"></div>
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const date = now.toLocaleDateString();
+            document.getElementById('orario-data').textContent = time;
+            document.getElementById('calendario-data').textContent = date;
+        }
+
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+    </script>
 </body>
 
 </html>

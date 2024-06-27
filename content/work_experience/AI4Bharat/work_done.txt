@@ -1,0 +1,8 @@
+- Tech Team Intern at AI4Bharat (November 2023 - March 2024)
+
+Accomplishments: 
+I played a key role in developing an Indic-OCR model capable of performing optical character recognition on various native Indian languages. I curated a substantial dataset of over 300,000 documents, including newspapers, books, and publications, to train the model effectively. Additionally, I designed scripts for synthetic document generation, incorporating multilinguality to ensure high-quality documents for 12 Indian regional languages. I also experimented with models like DiT and LayoutParsers to evaluate their efficiency for inference tasks.
+
+
+Skills Gained: 
+This internship significantly expanded my knowledge of OCR technology and its application in a multilingual context. I gained experience in data collection, preprocessing, and augmentation, particularly for training deep learning models. Experimenting with different OCR models like DiT and LayoutParsers broadened my understanding of the field.
