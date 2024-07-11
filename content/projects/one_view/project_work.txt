@@ -1,0 +1,8 @@
+- One View (September 2023 - December 2023)
+
+Accomplishments: 
+I developed a group photo-sharing platform where users can easily share photos amongst themselves. This full-stack project utilized MongoDB and Python for the backend and HTML, CSS, and JS for the frontend. I incorporated a facial clustering algorithm using the DBSCAN model to simplify the process of finding images based on individuals present.
+
+
+Skills Gained: 
+This project allowed me to solidify my full-stack development skills, working with both frontend and backend technologies. I gained experience with database management using MongoDB, implementing user authentication, and developing image processing algorithms for facial recognition.

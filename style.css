@@ -1030,6 +1030,7 @@ label input {
     margin: 10px;
     text-align: center;
     cursor: pointer;
+    position: relative;
 }
 
 .file-item img.file-icon {
@@ -1041,6 +1042,48 @@ label input {
     display: block;
     margin-top: 5px;
     word-wrap: break-word;
+}
+
+.link-icon {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #24292e;
+    color: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    text-decoration: none;
+    transition: transform 0.2s ease-in-out;
+}
+
+.link-icon:hover {
+    transform: scale(1.2);
+}
+
+.github-link {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #24292e;
+    color: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    text-decoration: none;
+    transition: transform 0.2s ease-in-out;
+}
+
+.github-link:hover {
+    transform: scale(1.2);
 }
 
 pre {

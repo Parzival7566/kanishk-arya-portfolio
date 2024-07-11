@@ -1,0 +1,7 @@
+- VSpeak (September 2023 - October 2023)
+
+Accomplishments: 
+I developed a video language changing tool that takes a video input and converts the spoken language to the user's selected language. This full-stack project used Python for the backend and HTML, CSS, and JS for the frontend. The pipeline incorporated multiple NLP-based systems for speech-to-text, language translation, grammar correction, and text-to-speech. User-side validation was implemented at each step, allowing users to review and edit the processed text.
+
+Skills Gained: 
+This project showcased my ability to integrate various NLP techniques into a cohesive application. I gained experience with speech processing, machine translation, and building interactive user interfaces.

@@ -209,21 +209,38 @@ function openFolder(folderName) {
                         <div class="folder-contents">
             `;
             files.forEach(file => {
-                if (file.endsWith('.txt')) {
-                    folderWindow += `<div class="file-item" onclick="openTextFile('${folderName}', '${file}')">
-                                        <img src="icons/text-file-icon.png" class="file-icon" alt="file">
-                                        <span>${file}</span>
-                                     </div>`;
-                } else if (file.endsWith('.jpg') || file.endsWith('.png')) {
-                    folderWindow += `<div class="file-item" onclick="openImage('${folderName}', '${file}')">
-                                        <img src="icons/image-file-icon.png" class="file-icon" alt="file">
-                                        <span>${file}</span>
-                                     </div>`;
+                const [fileName, link] = file.split('|');
+                let linkIcon = '';
+                if (link) {
+                    if (folderName === 'research_profile') {
+                        linkIcon = '<i class="fas fa-external-link-alt"></i>';
+                    } else if (link.includes('github.com')) {
+                        linkIcon = '<i class="fab fa-github"></i>';
+                    } else {
+                        linkIcon = '<i class="fas fa-link"></i>';
+                    }
+                }
+                if (fileName.endsWith('.txt')) {
+                    folderWindow += `
+                        <div class="file-item">
+                            <img src="icons/text-file-icon.png" class="file-icon" alt="file" onclick="openTextFile('${folderName}', '${fileName}')">
+                            <span>${fileName}</span>
+                            ${link ? `<a href="${link}" target="_blank" class="link-icon">${linkIcon}</a>` : ''}
+                        </div>`;
+                } else if (fileName.endsWith('.jpg') || fileName.endsWith('.png')) {
+                    folderWindow += `
+                        <div class="file-item">
+                            <img src="icons/image-file-icon.png" class="file-icon" alt="file" onclick="openImage('${folderName}', '${fileName}')">
+                            <span>${fileName}</span>
+                            ${link ? `<a href="${link}" target="_blank" class="link-icon">${linkIcon}</a>` : ''}
+                        </div>`;
                 } else {
-                    folderWindow += `<div class="file-item" onclick="openFolder('${folderName}/${file}')">
-                                        <img src="icons/folder-icon.png" class="file-icon" alt="folder">
-                                        <span>${file}</span>
-                                     </div>`;
+                    folderWindow += `
+                        <div class="file-item">
+                            <img src="icons/folder-icon.png" class="file-icon" alt="folder" onclick="openFolder('${folderName}/${fileName}')">
+                            <span>${fileName}</span>
+                            ${link ? `<a href="${link}" target="_blank" class="link-icon">${linkIcon}</a>` : ''}
+                        </div>`;
                 }
             });
             folderWindow += `

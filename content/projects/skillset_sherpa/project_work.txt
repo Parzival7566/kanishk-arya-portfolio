@@ -1,0 +1,7 @@
+- SkillSet Sherpa (September 2023)
+
+Accomplishments: 
+I created a chatbot designed to provide career guidance to students. Leveraging a pre-trained LLM, I built a complete web interface using Python Flask for the backend and HTML, CSS for the frontend. To personalize the guidance, I incorporated an OCR model to extract data from student mark sheets and the results of the Holland Code (RIASEC) Test. This data was then used to tailor a prompt for the LLama-2-70B LLM, ensuring relevant and insightful responses.
+
+Skills Gained: 
+This project honed my skills in chatbot development, natural language processing, and web development. I gained experience working with pre-trained LLMs, integrating OCR technology, and building user-friendly interfaces.

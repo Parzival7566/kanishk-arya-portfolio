@@ -1,0 +1,7 @@
+- ViziAssist (September 2022 - December 2023)
+
+Accomplishments: 
+I developed the framework for a road obstacle detection system using data from the IDD dataset. The model, currently in its alpha stage, efficiently classifies road obstacles like cars and pedestrians. I built this project from scratch using the NVIDIA Jetson Nano Developer Kit, showcasing my ability to work with embedded systems and real-time applications. A paper detailing the project has been submitted to relevant conferences and is set for publication in December 2024.
+
+Skills Gained: 
+This project allowed me to delve into computer vision, object detection, and embedded systems development. I gained hands-on experience with deep learning model training, dataset preparation, and deploying models on resource-constrained devices. My understanding of real-time applications and the challenges associated with them deepened through this project.

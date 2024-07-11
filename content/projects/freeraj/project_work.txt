@@ -1,0 +1,7 @@
+- Free Raj (September 2023 - December 2023)
+
+Accomplishments: 
+I created a canteen food ordering platform designed specifically for college students and canteen vendors. This full-stack project utilized MongoDB and Python for the backend and HTML, CSS, and JS along with D3.js for interactive graphs on the frontend. I also implemented a food recommendation system that calculates cosine similarity between user-ordered items, providing personalized suggestions.
+
+Skills Gained: 
+This project further strengthened my full-stack development skills, focusing on building a user-friendly and interactive platform. I gained experience with data visualization using D3.js, implementing recommendation systems, and managing user interactions within a web application.
