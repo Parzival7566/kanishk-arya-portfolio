@@ -1,4 +1,3 @@
 README.txt
 photo-i-clicked.jpg
 thats-me.jpg
-subfolder1
